@@ -3,21 +3,37 @@ alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
 
 
 
+
+#TODO-1: Create a function called 'encrypt' that takes the 'text' and 'shift' as inputs.
 direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
 text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
 
-#TODO-1: Create a function called 'encrypt' that takes the 'text' and 'shift' as inputs.
-
 def encrpyt(text, shift):
-    for i, j in enumerate(text):
-        lshift = alphabet.index(j) + shift
-        j = alphabet[lshift]
-        print(j)
+    if direction == 'encode':
+        encode_text = ""
+        for i, j in enumerate(text):
+            lshift = alphabet.index(j) + shift
+            if lshift >= len(alphabet):
+                lshift = len(alphabet) - lshift
+            encode_text = encode_text+alphabet[lshift]
+    elif direction == 'decode':
+        encode_text = ""
+        for i, j in enumerate(text):
+            lshift = alphabet.index(j) - shift + 1
+            if lshift >= len(alphabet):
+                lshift = len(alphabet) - lshift
 
-    print(shift)
 
-encrpyt(text, shift)
+            encode_text = encode_text+alphabet[lshift]
+
+    print(encode_text)
+
+while direction in ('decode','encode'):
+
+    encrpyt(text, shift)
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+
 
     #TODO-2: Inside the 'encrypt' function, shift each letter of the 'text' forwards in the alphabet by the shift amount and print the encrypted text.  
     #e.g. 
