@@ -19,7 +19,10 @@ continue_service = True
 
 def make_drink(drink):
     if drink == 'hot chocolate':
-        drink_machine['Water'] -= recipes[drink]['Water']
+        if drink_machine['Water'] - recipes[drink]['Water'] > 0:
+            drink_machine['Water'] -= recipes[drink]['Water']
+        else:
+            print('out of resources')
         return drink_machine
     elif drink == 'root beer float':
         pass
